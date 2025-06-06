@@ -1,0 +1,223 @@
+.navbar {
+  z-index: 100;
+  color: #fff;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), transparent);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: clamp(0.7rem, 1.5vw, 1rem) clamp(1.5rem, 3vw, 3rem);
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transition: transform 0.3s ease, background-color 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+.navbar.hidden {
+  transform: translateY(-100%);
+}
+
+.navbar:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+}
+
+.logo {
+  opacity: 0;
+  flex: 0.8; /* Reduced from 1 to move slightly right */
+  animation: fadeIn 0.8s ease-out forwards;
+  margin-left: 1rem; /* Add some margin from the left */
+}
+
+.logoText {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.1; /* Slightly reduced line height */
+}
+
+.logoText span:first-child {
+  font-size: clamp(1.1rem, 1.6vw, 1.3rem); /* Reduced size */
+  font-weight: 500;
+}
+
+.logoText span:last-child {
+  font-size: clamp(0.9rem, 1.1vw, 1rem); /* Reduced size */
+  font-weight: 400;
+}
+
+.links {
+  flex: 2.2; /* Increased from 2 to balance the logo position */
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: clamp(2rem, 3vw, 4rem);
+  margin-left: clamp(2rem, 4vw, 6rem);
+  opacity: 0;
+  animation: fadeIn 0.8s ease-out 0.2s forwards;
+  font-family: 'Poppins', sans-serif;
+}
+
+.links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 400;
+  position: relative;
+  transition: all 0.3s ease;
+  padding-right: 20px;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.links a::after {
+  content: '›';
+  position: absolute;
+  right: 0;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s ease;
+}
+
+.links a::before {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #e82574;
+  transition: width 0.3s ease;
+}
+
+.links a:hover {
+  color: #e82574;
+  transform: translateX(5px);
+}
+
+.links a:hover::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.links a:hover::before {
+  width: calc(100% - 20px);
+}
+
+.navBookBtn {
+  opacity: 0;
+  animation: fadeIn 0.8s ease-out 0.4s forwards;
+  background: linear-gradient(45deg, #e82574, #ff4081);
+  color: white;
+  text-decoration: none;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 24px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  margin-right: 1rem;
+}
+
+.navBookBtn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.6) 50%,
+    transparent 100%
+  );
+  transition: 0.5s ease;
+  z-index: 1;
+}
+
+.navBookBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(232, 37, 116, 0.3);
+}
+
+.navBookBtn:hover::after {
+  left: 100%;
+  animation: shine 0.7s ease-in;
+}
+
+@keyframes shine {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(232, 37, 116, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(232, 37, 116, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(232, 37, 116, 0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(232, 37, 116, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(232, 37, 116, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(232, 37, 116, 0);
+  }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@media screen and (max-width: 768px) {
+  .navbar {
+    padding: 0.8rem;
+  }
+
+  .links {
+    display: none;
+  }
+
+  .logo {
+    flex: 0;
+  }
+}
